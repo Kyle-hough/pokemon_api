@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useState} from 'react'
 
 function App() {
@@ -11,10 +12,20 @@ function App() {
         setPokemon(Response)
       })
       .catch(err =>console.error(err));
+    }
+
+  const pokemonAxios = () => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0`)
+    .then(response => {
+      console.log(response.data)
+      setPokemon(response.data)
+    })
+    .catch(err =>console.error(err))
   }
   return (
     <div>
       <button onClick={fetchPokemon}>Fetch</button>
+      <button onClick={pokemonAxios}>Axios</button>
       {
         pokemon ? 
         <ul>
